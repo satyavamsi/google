@@ -8,6 +8,7 @@ import AppsIcon from '@material-ui/icons/Apps';
 import './Home.css';
 
 import Search from '../components/Search';
+import Profile from '../components/Profile'
 
 function Home() {
     return (
@@ -28,6 +29,7 @@ function Home() {
                 <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="" />
                 <div className="home__inputContainer">
                     <Search />
+                    <Profile />
                 </div>
             </div>
         </div>

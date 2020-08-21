@@ -5,10 +5,10 @@ import './SearchPage.css';
 import { useStateValue } from '../StateProvider';
 import useGoogleSearch from '../useGoogleSearch';
 
-import data from '../response';
 import { Link } from 'react-router-dom';
 
 import Search from '../components/Search';
+import Profile from '../components/Profile';
 
 import SearchIcon from '@material-ui/icons/Search'
 import DescriptionIcon from '@material-ui/icons/Description'
@@ -21,8 +21,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert'
 function SearchPage() {
 
     const [{ term }, dispatch] = useStateValue()
-    // const { data } = useGoogleSearch(term);
-    console.log(data);
+    const { data } = useGoogleSearch(term);
+
     return (
         <div className="searchPage">
             <div className="searchPage__header">
@@ -32,7 +32,7 @@ function SearchPage() {
                         src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="" />
                 </Link>
                 <div className="searchPage__headerBody">
-                    <Search hideButtons />
+                    <Search value={term} hideButtons />
                     <div className="searchPage__options">
                         <div className="searchPage__optionsLeft">
                             <div className="searchPage__option">
@@ -69,6 +69,7 @@ function SearchPage() {
                             </div>
                         </div>
                     </div>
+                    <Profile hideSource />
                 </div>
             </div>
             {true && (
@@ -77,8 +78,15 @@ function SearchPage() {
                         searchInformation.formattedTotalResults} results ({data?.searchInformation
                             .formattedSearchTime} seconds) for Tesla</p>
                     {data?.items.map(item => (
-                        <div className="searchPage_result">
-                            <a href={item.link} target="_blank">
+                        <div className="searchPage__result">
+                            <a className="searchPage__resultTitle" href={item.link} target="_blank">
+                                {item.pagemap?.cse_image?.
+                                    length > 0 && item.pagemap?.cse_image[0]?.src && (
+                                        <img src={
+                                            item.pagemap?.cse_image?.length > 0 &&
+                                            item.pagemap?.cse_image[0]?.src
+                                        } alt="" className="searchPage__resultImage" />
+                                    )}
                                 {item.displayLink}
                                 <h2>{item.title}</h2>
                             </a>

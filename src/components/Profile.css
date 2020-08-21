@@ -1,0 +1,23 @@
+.profile {
+  margin: 20px;
+  text-align: center;
+  line-height: 2;
+  font-weight: 600;
+  color: #504e4e;
+}
+
+.profile a {
+  color: #504e4e !important;
+  font-weight: 800;
+}
+
+.hideSource {
+  margin: 0px;
+  margin-top: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .profile {
+    margin: 0px;
+  }
+}

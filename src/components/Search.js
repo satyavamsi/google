@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom';
 
 
@@ -11,7 +11,7 @@ import { Button } from '@material-ui/core';
 import { useStateValue } from '../StateProvider'
 import { actionTypes } from '../reducer';
 
-function Search({ hideButtons = false }) {
+function Search({ value, hideButtons = false }) {
 
     const [state, dispatch] = useStateValue();
 
@@ -24,9 +24,14 @@ function Search({ hideButtons = false }) {
             type: actionTypes.SET_SEARCH_TERM,
             term: input
         })
-        setInput("");
-        history.push("/search");
+        if (input.length > 0) {
+            history.push("/search");
+        }
     }
+
+    useEffect(() => {
+        setInput(value);
+    }, [])
 
     const handleChange = e => {
         setInput(e.target.value);

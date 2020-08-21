@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import API_KEY from './keys';
 
+
+import response from './response';
+
 const CONTEXT_KEY = "179b75aa5ba32243d";
 const useGoogleSearch = (term) => {
     const [data, setData] = useState(null);
@@ -14,6 +17,9 @@ const useGoogleSearch = (term) => {
                 .then(res => res.json())
                 .then(result => {
                     setData(result);
+                })
+                .catch((err) => {
+                    setData(response)
                 })
         }
 
